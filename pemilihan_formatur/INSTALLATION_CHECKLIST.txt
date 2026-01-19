@@ -1,0 +1,365 @@
+╔════════════════════════════════════════════════════════════════╗
+║                    INSTALLATION CHECKLIST                      ║
+║              E-VOTING PEMILIHAN FORMATUR 2026                 ║
+╚════════════════════════════════════════════════════════════════╝
+
+✅ PRE-INSTALLATION
+════════════════════════════════════════════════════════════════
+
+□ XAMPP installed on your system
+□ PHP version 7.4 or higher
+□ MySQL 5.7 or MariaDB installed
+□ Apache web server available
+□ Files extracted to: C:\xampp\htdocs\pemilihan_formatur\
+
+════════════════════════════════════════════════════════════════
+
+✅ STEP 1: START XAMPP SERVICES
+════════════════════════════════════════════════════════════════
+
+□ Open XAMPP Control Panel
+□ Click "Start" next to Apache (wait until it says "Running")
+□ Click "Start" next to MySQL (wait until it says "Running")
+
+Verify:
+  □ Apache shows "Running" in green
+  □ MySQL shows "Running" in green
+
+════════════════════════════════════════════════════════════════
+
+✅ STEP 2: READ DOCUMENTATION
+════════════════════════════════════════════════════════════════
+
+□ Read: 00_BACA_DULU.txt (2 minutes)
+□ Read: QUICK_START.md (5-10 minutes)
+
+════════════════════════════════════════════════════════════════
+
+✅ STEP 3: AUTOMATIC DATABASE SETUP
+════════════════════════════════════════════════════════════════
+
+□ Open web browser
+□ Navigate to: http://localhost/pemilihan_formatur/setup.php
+□ Wait for page to load (5-10 seconds)
+□ Look for green success message
+□ Check message shows:
+   - Tables created successfully
+   - Demo data inserted
+   - Sample accounts created
+
+If error appears:
+  → Check QUICK_START.md troubleshooting section
+
+════════════════════════════════════════════════════════════════
+
+✅ STEP 4: VERIFY DATABASE SETUP
+════════════════════════════════════════════════════════════════
+
+Method A - Via Browser:
+  □ Open: http://localhost/phpmyadmin
+  □ Login with: root (no password)
+  □ Look for: "pemilihan_formatur" database
+  □ Click it to verify tables exist:
+     - users
+     - kandidat
+     - voting
+     - periode_pemilihan
+
+Method B - If setup.php worked:
+  □ You can skip this (database is created)
+
+════════════════════════════════════════════════════════════════
+
+✅ STEP 5: TEST LOGIN - ADMIN
+════════════════════════════════════════════════════════════════
+
+□ Open: http://localhost/pemilihan_formatur/login.php
+□ Enter:
+   Username: admin
+   Password: admin123
+□ Click Login
+□ Should redirect to: pages/admin/dashboard.php
+
+Verify:
+  □ See "E-Voting Pemilihan Formatur" header
+  □ See "Admin Dashboard" title
+  □ See statistics cards (Total Pemilih, Suara Masuk, etc.)
+  □ See menu buttons (Kelola Kandidat, Kelola Pemilih)
+
+════════════════════════════════════════════════════════════════
+
+✅ STEP 6: EXPLORE ADMIN FEATURES
+════════════════════════════════════════════════════════════════
+
+□ On Admin Dashboard:
+   □ See statistics (should show 2 candidates, 3 users, etc.)
+   □ See real-time voting results
+   
+□ Click "Kelola Kandidat":
+   □ See list of 2 sample candidates
+   □ Try to add a new candidate
+   □ Verify it appears in list
+   
+□ Click "Kelola Pemilih":
+   □ See list of 3 test users
+   □ See voting status (Belum Memilih for all initially)
+
+════════════════════════════════════════════════════════════════
+
+✅ STEP 7: TEST LOGIN - PEMILIH
+════════════════════════════════════════════════════════════════
+
+□ Click Logout (top right corner)
+□ Open: http://localhost/pemilihan_formatur/login.php
+□ Enter:
+   Username: budi01
+   Password: 123456
+□ Click Login
+□ Should redirect to: pages/pemilih/dashboard.php
+
+Verify:
+  □ See "Pilih Kandidat Pilihan Anda" message
+  □ See candidate cards with visi/misi
+  □ See "Pilih Kandidat Ini" buttons
+
+════════════════════════════════════════════════════════════════
+
+✅ STEP 8: TEST VOTING
+════════════════════════════════════════════════════════════════
+
+□ As budi01, click "Pilih Kandidat Ini" for any candidate
+□ Should see green success message:
+   "Terima kasih! Suara Anda telah tercatat"
+□ Page should now show locked state (can't vote again)
+
+Verify voting worked:
+  □ Can't click any more "Pilih Kandidat Ini" buttons
+  □ See message: "Anda sudah melakukan pemilihan"
+  □ Can still see results
+
+════════════════════════════════════════════════════════════════
+
+✅ STEP 9: VIEW RESULTS
+════════════════════════════════════════════════════════════════
+
+□ Click "Lihat Hasil Voting" button
+□ Should see voting results page
+
+Verify:
+  □ See all candidates listed
+  □ See progress bars
+  □ See vote counts (at least 1 vote for chosen candidate)
+  □ See percentages
+
+════════════════════════════════════════════════════════════════
+
+✅ STEP 10: VERIFY ADMIN SEES UPDATE
+════════════════════════════════════════════════════════════════
+
+□ Logout (top right)
+□ Login as admin again (admin / admin123)
+□ Check Kelola Pemilih page
+
+Verify:
+  □ budi01 now shows "Sudah Memilih" (green badge)
+  □ siti01 and siti01 still show "Belum Memilih"
+  
+□ Check dashboard for updated statistics:
+  □ "Suara Masuk" should show: 1
+  □ "Tingkat Partisipasi" should show: 33.3%
+  □ Candidate vote count should show: 1
+
+════════════════════════════════════════════════════════════════
+
+✅ STEP 11: TEST SECOND VOTER
+════════════════════════════════════════════════════════════════
+
+□ Logout
+□ Login as: siti01 / 123456
+□ Vote for a (different) candidate
+□ See success message
+□ See results updated
+
+Verify in admin:
+  □ Both budi01 and siti01 show "Sudah Memilih"
+  □ Statistics updated accordingly
+
+════════════════════════════════════════════════════════════════
+
+✅ STEP 12: CHECK HOMEPAGE
+════════════════════════════════════════════════════════════════
+
+□ Logout
+□ Go to home: http://localhost/pemilihan_formatur/
+□ (Or just click back/close and access root)
+
+Verify:
+  □ See "E-Voting Pemilihan Formatur" header
+  □ See statistics (Total Pemilih, Suara Masuk, etc.)
+  □ See voting results with graphs
+  □ See "Mulai Pemilihan" button
+  □ No personal info visible (public page)
+
+════════════════════════════════════════════════════════════════
+
+✅ STEP 13: TEST ERROR SCENARIOS
+════════════════════════════════════════════════════════════════
+
+Try invalid login:
+  □ Open login page
+  □ Enter wrong username/password
+  □ See error message: "Username atau password salah!"
+  □ Try again
+
+Try direct access without login:
+  □ Try to go to: http://localhost/pemilihan_formatur/pages/admin/dashboard.php
+  □ Should redirect to login page
+
+════════════════════════════════════════════════════════════════
+
+✅ STEP 14: VERIFY ALL FILES EXIST
+════════════════════════════════════════════════════════════════
+
+Core Files:
+  □ C:\xampp\htdocs\pemilihan_formatur\config\database.php
+  □ C:\xampp\htdocs\pemilihan_formatur\includes\functions.php
+  □ C:\xampp\htdocs\pemilihan_formatur\login.php
+  □ C:\xampp\htdocs\pemilihan_formatur\logout.php
+  □ C:\xampp\htdocs\pemilihan_formatur\setup.php
+  □ C:\xampp\htdocs\pemilihan_formatur\index.php
+
+Admin Pages:
+  □ C:\xampp\htdocs\pemilihan_formatur\pages\admin\dashboard.php
+  □ C:\xampp\htdocs\pemilihan_formatur\pages\admin\kelola_kandidat.php
+  □ C:\xampp\htdocs\pemilihan_formatur\pages\admin\kelola_pemilih.php
+
+Pemilih Pages:
+  □ C:\xampp\htdocs\pemilihan_formatur\pages\pemilih\dashboard.php
+  □ C:\xampp\htdocs\pemilihan_formatur\pages\pemilih\hasil.php
+
+Documentation:
+  □ All .md and .txt files present in root directory
+
+════════════════════════════════════════════════════════════════
+
+✅ STEP 15: DOCUMENTATION REVIEW
+════════════════════════════════════════════════════════════════
+
+□ Read: PANDUAN_PENGGUNA.md (if you're an end user)
+□ Read: DEVELOPER_GUIDE.md (if you're a developer)
+□ Read: README.md (for complete reference)
+□ Bookmark: INDEX_DOKUMENTASI.md (for navigation)
+
+════════════════════════════════════════════════════════════════
+
+✅ CONFIGURATION (OPTIONAL)
+════════════════════════════════════════════════════════════════
+
+If you need to change settings:
+
+Database Credentials:
+  □ Edit: config/database.php
+  □ Update host, user, password if different
+  □ Default: localhost, root, (no password)
+
+Customize Colors:
+  □ Search for: #667eea and #764ba2
+  □ Replace with your color codes
+  □ Changes apply to all pages
+
+App Name:
+  □ Edit: config/database.php
+  □ Change: define('SITE_NAME', 'New Name');
+
+════════════════════════════════════════════════════════════════
+
+✅ SECURITY NOTES
+════════════════════════════════════════════════════════════════
+
+Current Status: DEVELOPMENT READY
+  ✓ SQL injection protection active
+  ✓ XSS protection active
+  ✓ Authentication working
+  ✓ Data integrity protected
+
+For Production:
+  ⚠️  Change password hashing (MD5 → bcrypt)
+  ⚠️  Add CSRF protection
+  ⚠️  Enable HTTPS
+  ⚠️  Update security headers
+  □ See: DEVELOPER_GUIDE.md for details
+
+════════════════════════════════════════════════════════════════
+
+✅ TROUBLESHOOTING
+════════════════════════════════════════════════════════════════
+
+If something doesn't work:
+  □ Check: QUICK_START.md (Troubleshooting section)
+  □ Check: Browser console (F12)
+  □ Check: Database in phpMyAdmin
+
+Common issues:
+  □ "Connection failed" → Start MySQL
+  □ "Table doesn't exist" → Run setup.php again
+  □ "Login failed" → Use correct demo credentials
+  □ "Page not found" → Check file paths
+
+════════════════════════════════════════════════════════════════
+
+✅ FINAL CHECKLIST
+════════════════════════════════════════════════════════════════
+
+INSTALLATION:
+  □ All files extracted
+  □ XAMPP running (Apache & MySQL)
+  □ Database setup completed
+  □ Sample data loaded
+
+TESTING:
+  □ Admin login works
+  □ Admin can manage candidates
+  □ Admin can view voters
+  □ Pemilih login works
+  □ Pemilih can vote
+  □ Results display correctly
+  □ Homepage shows data
+
+DOCUMENTATION:
+  □ Read setup guides
+  □ Know where to find help
+  □ Understand features
+
+READY TO USE:
+  □ Application is working
+  □ All features tested
+  □ Database verified
+  □ Ready for actual use
+
+════════════════════════════════════════════════════════════════
+
+🎉 INSTALLATION COMPLETE!
+════════════════════════════════════════════════════════════════
+
+Your E-Voting application is ready to use!
+
+NEXT STEPS:
+  1. Read relevant documentation
+  2. Customize if needed (colors, names)
+  3. Prepare for actual voting period
+  4. Add real candidates and voters
+
+FOR HELP:
+  → Read: 00_BACA_DULU.txt
+  → Read: QUICK_START.md
+  → Read: PANDUAN_PENGGUNA.md
+
+HAPPY VOTING! 🗳️
+
+════════════════════════════════════════════════════════════════
+
+Date Installed: _____________
+Version: 1.0
+Status: ✅ READY FOR USE
+
+════════════════════════════════════════════════════════════════

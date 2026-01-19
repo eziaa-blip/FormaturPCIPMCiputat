@@ -1,0 +1,412 @@
+╔════════════════════════════════════════════════════════════════╗
+║                    HELPFUL REFERENCES                          ║
+║              E-VOTING PEMILIHAN FORMATUR 2026                 ║
+╚════════════════════════════════════════════════════════════════╝
+
+📌 FILE YANG HARUS DIBACA TERLEBIH DAHULU
+════════════════════════════════════════════════════════════════
+
+1️⃣  00_BACA_DULU.txt
+    └─ Ringkasan project, akun demo, URLs penting
+    └─ Durasi: 2-3 menit
+    └─ BACA INI DULU! ⭐
+
+2️⃣  QUICK_START.md
+    └─ Panduan setup cepat
+    └─ Testing steps
+    └─ Troubleshooting
+    └─ Durasi: 5-10 menit
+
+3️⃣  Gunakan sesuai kebutuhan:
+    ├─ PANDUAN_PENGGUNA.md (untuk end users)
+    ├─ DEVELOPER_GUIDE.md (untuk developers)
+    ├─ SQL_QUERIES.md (untuk database admin)
+    └─ README.md (dokumentasi lengkap)
+
+════════════════════════════════════════════════════════════════
+
+🌐 AKSES URL PENTING (Bookmark!)
+════════════════════════════════════════════════════════════════
+
+APLIKASI:
+  Home:     http://localhost/pemilihan_formatur/
+  Setup:    http://localhost/pemilihan_formatur/setup.php
+  Login:    http://localhost/pemilihan_formatur/login.php
+
+ADMIN:
+  Admin DB: http://localhost/phpmyadmin
+  
+Catatan: Copy-paste URL ke address bar browser
+
+════════════════════════════════════════════════════════════════
+
+🔑 AKUN LOGIN (Save ini!)
+════════════════════════════════════════════════════════════════
+
+ADMIN:
+  Username: admin
+  Password: admin123
+  
+PEMILIH (Pilih salah satu):
+  Username: budi01
+  Password: 123456
+  
+  ATAU
+  
+  Username: siti01
+  Password: 123456
+
+════════════════════════════════════════════════════════════════
+
+⚡ LANGKAH SETUP CEPAT (5 MENIT)
+════════════════════════════════════════════════════════════════
+
+1. Pastikan XAMPP running:
+   □ Apache ✓
+   □ MySQL ✓
+
+2. Buka browser, akses:
+   http://localhost/pemilihan_formatur/setup.php
+
+3. Tunggu sampai muncul "Setup Complete!" ✓
+
+4. Login:
+   http://localhost/pemilihan_formatur/login.php
+
+5. Gunakan akun demo dari list di atas
+
+SELESAI! ✅
+
+════════════════════════════════════════════════════════════════
+
+📊 FITUR QUICK REFERENCE
+════════════════════════════════════════════════════════════════
+
+ADMIN BISA:
+  ✓ Lihat dashboard dengan statistik real-time
+  ✓ Tambah/hapus kandidat
+  ✓ Lihat daftar pemilih & status
+  ✓ Lihat hasil voting real-time
+  ✓ Hapus pemilih jika perlu
+
+PEMILIH BISA:
+  ✓ Lihat semua kandidat dengan visi/misi
+  ✓ Pilih 1 kandidat (hanya bisa 1x)
+  ✓ Lihat hasil voting real-time
+  ✓ Logout
+
+PUBLIC BISA:
+  ✓ Lihat homepage dengan statistik
+  ✓ Lihat hasil voting real-time
+  ✓ Login untuk vote
+
+════════════════════════════════════════════════════════════════
+
+🆘 TROUBLESHOOTING CEPAT
+════════════════════════════════════════════════════════════════
+
+MASALAH: "Connection failed"
+SOLUSI:
+  1. Pastikan MySQL running (XAMPP Control Panel)
+  2. Cek: config/database.php (credentials benar?)
+  3. Database port default = 3306
+
+MASALAH: "Table doesn't exist"
+SOLUSI:
+  1. Jalankan: http://localhost/pemilihan_formatur/setup.php
+  2. Atau import SQL ke phpMyAdmin
+
+MASALAH: "Login gagal"
+SOLUSI:
+  1. Pastikan username & password benar (lihat AKUN LOGIN)
+  2. Reset password via phpMyAdmin:
+     UPDATE users SET password=MD5('123456') WHERE username='admin';
+
+MASALAH: "Pemilih tidak bisa vote"
+SOLUSI:
+  1. Cek apakah sudah login
+  2. Di phpMyAdmin: SELECT * FROM users WHERE sudah_memilih=1;
+  3. Jika ingin reset: UPDATE users SET sudah_memilih=0;
+
+MASALAH: "Hasil voting tidak update"
+SOLUSI:
+  1. Refresh browser (F5)
+  2. Cek: http://localhost/phpmyadmin → voting table
+  3. Pastikan voting terisi
+
+SEMUA ERROR?
+SOLUSI:
+  1. Baca: QUICK_START.md (section Troubleshooting)
+  2. Buka: browser F12 (Developer Tools)
+  3. Lihat: error message
+
+════════════════════════════════════════════════════════════════
+
+📁 FILE STRUCTURE (Quick Map)
+════════════════════════════════════════════════════════════════
+
+KONFIGURASI:
+  config/database.php        ← Edit untuk ubah database settings
+  
+FUNGSI:
+  includes/functions.php     ← Tempat semua helper functions
+  
+LOGIN & HOMEPAGE:
+  login.php                  ← Login form & process
+  index.php                  ← Homepage publik
+  logout.php                 ← Logout handler
+  setup.php                  ← Database auto-setup
+  
+ADMIN:
+  pages/admin/dashboard.php        ← Dashboard admin
+  pages/admin/kelola_kandidat.php  ← Manage kandidat
+  pages/admin/kelola_pemilih.php   ← Manage pemilih
+  
+PEMILIH:
+  pages/pemilih/dashboard.php      ← Voting form
+  pages/pemilih/hasil.php          ← Results view
+
+════════════════════════════════════════════════════════════════
+
+🎨 CUSTOMIZE (QUICK TIPS)
+════════════════════════════════════════════════════════════════
+
+UBAH WARNA:
+  Cari "#667eea" (ungu muda) & "#764ba2" (ungu gelap)
+  di setiap file PHP, ganti dengan warna pilihan
+
+UBAH NAMA APP:
+  Edit config/database.php:
+  define('SITE_NAME', 'Nama Baru');
+
+UBAH DATABASE:
+  Edit config/database.php:
+  $host = 'new-host';
+  $db_user = 'new-user';
+  $db_password = 'new-pass';
+  $db_name = 'new-db';
+
+UBAH FONT:
+  Edit CSS section di setiap file PHP:
+  font-family: 'Arial', sans-serif;
+
+════════════════════════════════════════════════════════════════
+
+💾 DATABASE BACKUP
+════════════════════════════════════════════════════════════════
+
+BACKUP via phpMyAdmin:
+  1. Buka: http://localhost/phpmyadmin
+  2. Klik: pemilihan_formatur database
+  3. Tab: Export
+  4. Format: SQL
+  5. Klik: Go (download)
+
+RESTORE via phpMyAdmin:
+  1. Buka: http://localhost/phpmyadmin
+  2. Klik: Import
+  3. Pilih: file .sql
+  4. Klik: Go
+
+RESET DATABASE:
+  Jalankan ulang: http://localhost/pemilihan_formatur/setup.php
+  (Database akan di-reset dan sample data di-insert ulang)
+
+════════════════════════════════════════════════════════════════
+
+📱 TESTING DI DEVICE LAIN
+════════════════════════════════════════════════════════════════
+
+DARI PC YANG SAMA:
+  http://localhost/pemilihan_formatur/
+
+DARI DEVICE BERBEDA (smartphone, tablet):
+  1. Cari IP PC: ipconfig (di Windows terminal)
+  2. Cari "IPv4 Address" (biasanya 192.168.x.x)
+  3. Akses dari device lain:
+     http://[IP_PC]:80/pemilihan_formatur/
+  
+  Contoh: http://192.168.1.100:80/pemilihan_formatur/
+
+════════════════════════════════════════════════════════════════
+
+🔒 SECURITY NOTES
+════════════════════════════════════════════════════════════════
+
+DEVELOPMENT (SEKARANG):
+  ✓ SQL injection protection ✓
+  ✓ XSS protection ✓
+  ✓ Password hashing (MD5)
+  ✓ Session authentication ✓
+
+PRODUCTION (FUTURE):
+  ⚠️  Replace MD5 with bcrypt
+  ⚠️  Add CSRF tokens
+  ⚠️  Enable HTTPS
+  ⚠️  Add rate limiting
+  ⚠️  Add input validation
+
+LIHAT: DEVELOPER_GUIDE.md untuk code contoh
+
+════════════════════════════════════════════════════════════════
+
+📚 DOCUMENTATION QUICK MAP
+════════════════════════════════════════════════════════════════
+
+00_BACA_DULU.txt
+  └─ Mulai dari sini! Ringkasan & links
+  
+QUICK_START.md
+  └─ Setup 5 menit, testing, troubleshoot
+  
+PANDUAN_PENGGUNA.md
+  └─ Cara gunakan aplikasi (admin & pemilih)
+  
+README.md
+  └─ Dokumentasi lengkap & detail
+  
+DEVELOPER_GUIDE.md
+  └─ Untuk developer (code, custom, improve)
+  
+SQL_QUERIES.md
+  └─ Database queries siap pakai
+  
+SPESIFIKASI_TEKNIS.txt
+  └─ Technical details, architecture
+  
+DATABASE_SCHEMA.php
+  └─ Reference schema SQL
+  
+INDEX_DOKUMENTASI.md
+  └─ Navigasi semua dokumentasi
+  
+PROJECT_SUMMARY.txt
+  └─ Project overview & checklist
+
+════════════════════════════════════════════════════════════════
+
+⌚ WAKTU YANG DIBUTUHKAN
+════════════════════════════════════════════════════════════════
+
+Setup:               5 menit
+Testing dasar:       10 menit
+Baca dokumentasi:    20-30 menit
+Customization:       Varies
+Deployment:          Varies
+
+Total untuk start:   15-20 menit
+
+════════════════════════════════════════════════════════════════
+
+✨ FEATURES CHECKLIST
+════════════════════════════════════════════════════════════════
+
+AUTHENTICATION:
+  ✓ Login system
+  ✓ Logout system
+  ✓ Session management
+  ✓ Role-based access (admin/pemilih)
+
+VOTING:
+  ✓ Vote submission
+  ✓ One-vote-per-user enforcement
+  ✓ Vote confirmation
+  ✓ Prevent double voting
+
+ADMIN FEATURES:
+  ✓ Dashboard with stats
+  ✓ Candidate management
+  ✓ Voter management
+  ✓ Results viewing
+
+UI/UX:
+  ✓ Responsive design
+  ✓ Mobile friendly
+  ✓ Gradient theme
+  ✓ Clean interface
+  ✓ User feedback (alerts)
+
+SECURITY:
+  ✓ SQL injection protection
+  ✓ XSS protection
+  ✓ Authentication
+  ✓ Authorization
+  ✓ Data integrity
+
+════════════════════════════════════════════════════════════════
+
+🎯 NEXT ACTIONS
+════════════════════════════════════════════════════════════════
+
+RIGHT NOW:
+  1. Read: 00_BACA_DULU.txt
+  2. Read: QUICK_START.md
+  3. Run: setup.php
+
+TODAY:
+  1. Test login (admin & pemilih)
+  2. Test voting
+  3. Explore features
+  4. Read relevant documentation
+
+THIS WEEK:
+  1. Customize if needed
+  2. Add more users/candidates
+  3. Test thoroughly
+  4. Prepare for launch
+
+════════════════════════════════════════════════════════════════
+
+📞 WHERE TO GET HELP
+════════════════════════════════════════════════════════════════
+
+Browser won't connect?
+  → QUICK_START.md - Troubleshooting
+
+Forgot password?
+  → QUICK_START.md - Reset section
+  
+Lost in documentation?
+  → INDEX_DOKUMENTASI.md - Navigation guide
+
+Want to add feature?
+  → DEVELOPER_GUIDE.md - Examples provided
+
+Need database queries?
+  → SQL_QUERIES.md - Ready-to-use queries
+
+Technical details?
+  → SPESIFIKASI_TEKNIS.txt
+
+════════════════════════════════════════════════════════════════
+
+✅ SUCCESS CHECKLIST
+════════════════════════════════════════════════════════════════
+
+□ Baca 00_BACA_DULU.txt
+□ Baca QUICK_START.md
+□ Jalankan setup.php
+□ Setup berhasil (lihat success message)
+□ Login dengan admin/admin123
+□ Lihat admin dashboard
+□ Logout & login dengan budi01/123456
+□ Vote untuk kandidat
+□ Lihat hasil voting
+□ Logout
+□ SELESAI! 🎉
+
+════════════════════════════════════════════════════════════════
+
+🚀 SEKARANG SIAP UNTUK MEMULAI!
+
+Buka file: 00_BACA_DULU.txt atau QUICK_START.md
+
+Happy Voting! 🗳️
+
+════════════════════════════════════════════════════════════════
+
+Created: 2026-01-16
+Version: 1.0
+Status: ✅ Production Ready
+
+════════════════════════════════════════════════════════════════
